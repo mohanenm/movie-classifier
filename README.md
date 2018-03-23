@@ -20,9 +20,9 @@ used NLTK to classify movie reviews as positive or negative(sentiment analysis h
 #### 2. NLTK DOCUMENTATION
 
 #### You will be working with movie review data, which you can download here:https://github.com/dennybritz/cnn-text-classification-tf/tree/master/data/rt-polaritydata
- * You will find two files there (one with positive and one with negative reviews).
- * Your task is to build a binary classifier that will perform movie review classifica-tion automatically.
- * 1.Please split your data randomly into training (70%), development (15%)and test (15%) sets. (10 points)
+ * find two files there (one with positive and one with negative reviews).
+ * build a binary classifier that will perform movie review classifica-tion automatically.
+ * 1.split data randomly into training (70%), development (15%)and test (15%) sets. (10 points)
  * 2.Download and install LibSVM from https://www.csie.ntu.edu.tw/~cjlin/libsvm/.
     Convert the sentiment data into LibSVM sparse format. (30points) 
     You will find some guidelines by following these links:https://www.csie.ntu.edu.tw/~cjlin/libsvm/faq.html#/Q03:_Data_preparationhttps://stats.stackexchange.com/questions/61328/libsvm-data-format 
