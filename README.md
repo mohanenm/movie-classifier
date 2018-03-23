@@ -19,3 +19,13 @@ used NLTK to classify movie reviews as positive or negative(sentiment analysis h
 #### 1. https://www.twilio.com/blog/2017/09/sentiment-analysis-python-messy-data-nltk.html
 #### 2. NLTK DOCUMENTATION
 
+#### You will be working with movie review data, which you can download here:https://github.com/dennybritz/cnn-text-classification-tf/tree/master/data/rt-polaritydata
+ * You will find two files there (one with positive and one with negative reviews).
+ * Your task is to build a binary classifier that will perform movie review classifica-tion automatically.
+ * 1.Please split your data randomly into training (70%), development (15%)and test (15%) sets. (10 points)
+ * 2.Download and install LibSVM from https://www.csie.ntu.edu.tw/~cjlin/libsvm/.
+    Convert the sentiment data into LibSVM sparse format. (30points) 
+    You will find some guidelines by following these links:https://www.csie.ntu.edu.tw/~cjlin/libsvm/faq.html#/Q03:_Data_preparationhttps://stats.stackexchange.com/questions/61328/libsvm-data-format 
+ * 3.Use LibSVM command-line tools such as svm-train and svm-predict totrain and evaluate a linear SVM model on your development set. 
+   Tune alinear SVM by trying a few different C values such as 0.0001, 0.001, . . . ,1000, 10000 on thedevelopmentset. 
+ * Report the accuracy you obtainedfor each model. (30 points)4.Evaluate your best model on the test set. Report the final accuracy ofyour model on thetestset. (30 points)

@@ -3,8 +3,6 @@ import sklearn
 from sklearn.svm import LinearSVC
 from sklearn.datasets import make_classification
 
-
-
 ''' convert text into vectors'''
 ''' c = 0.10, c = 0.100: one of these will be the most accurate! find through validation set: for hw'''
 classifier = LinearSVC(c = 0.1)
