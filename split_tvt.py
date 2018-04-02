@@ -1,43 +1,63 @@
 import nltk
 import random
 from collections import Counter, defaultdict
-from operator import mul
+
+with open("rt-polarity.pos.txt", 'r') as f:
+    pos = f.read().split(' ')
+
+with open("rt-polarity.neg.txt", 'r') as f:
+    neg = f.read().split(' ')
+
+# positive vocab
+counter = Counter(pos)
+for word, count in counter.items():
+    posCount = ("{}:{}".format(word, count))
+
+# negative vocab
+counter = Counter(neg)
+for word, count in counter.items():
+    negCount = ("{}:{}".format(word, count))
+# pos count
+mypos = {}
+i = 0
+for item in neg:
+    if (i > 0 and item in mypos):
+        continue
+    else:
+        i = i + 1
+        mypos[item] = i
+
+p = []
+for item in pos:
+    p.append(mypos[item])
+    print(p)
+
+# neg count
+myneg = {}
+i = 0
+for item in neg:
+    if (i > 0 and item in myneg):
+        continue
+    else:
+        i = i + 1
+        myneg[item] = i
+
+n = []
+for item in neg:
+    n.append(myneg[item])
+
+    print(n)
 
 
-cp = Counter()
-pos = []
-with open("rt-polarity.pos.txt") as p:
-        for words in p.splitlines():
-            cp.update(words.split())
-        print(cp)
-
-
-cn = Counter()
-neg = []
-with open("rt-polarity.neg.txt") as p:
-    mylist = [line.rstrip('\n') for line in p]
-
-
-
-print(len(pos))
-print(len(neg))
 
 '''Split Data'''
 train = pos[:int((.7) * len(pos))] + neg[:int((.7) * len(neg))]
 test = pos[int((.85) * len(pos)):] + neg[int((.85) * len(neg)):]
 validate = pos[int((.85) * len(pos)):] + neg[int((.85) * len(neg)):]
 
-
 print(len(train))  # 70%
 print(len(test))  # 15%
 print(len(validate))  # 15%
-print(train)
-
-
-
-
-
-
 
 '''
 df = pd.DataFrame({'text': [[pos],
