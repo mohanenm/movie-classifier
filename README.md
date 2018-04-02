@@ -28,4 +28,5 @@ used NLTK to classify movie reviews as positive or negative(sentiment analysis h
     find some guidelines by following these links:https://www.csie.ntu.edu.tw/~cjlin/libsvm/faq.html#/Q03:_Data_preparationhttps://stats.stackexchange.com/questions/61328/libsvm-data-format 
  * 3.Use LibSVM command-line tools such as svm-train and svm-predict totrain and evaluate a linear SVM model on your development set. 
    Tune alinear SVM by trying a few different C values such as 0.0001, 0.001, . . . ,1000, 10000 on thedevelopmentset. 
- * Report the accuracy you obtainedfor each model. (30 points)4.Evaluate your best model on the test set. Report the final accuracy ofyour model on thetestset. (30 points)
+   Report the accuracy you obtainedfor each model. (30 points)
+ * 4.Evaluate your best model on the test set. Report the final accuracy ofyour model on thetestset. (30 points)

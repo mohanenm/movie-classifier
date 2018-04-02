@@ -3,6 +3,49 @@ import sklearn
 from sklearn.svm import LinearSVC
 from sklearn.datasets import make_classification
 
+pos = []
+with open("rt-polarity.pos.txt") as p:
+    for words in p:
+        pos.append([format_sentence(words), 'pos'])
+
+neg = []
+with open("rt-polarity.neg.txt") as p:
+    for words in p:
+        neg.append([format_sentence(words), 'neg'])
+
+        data = open("westPhil.txt", 'r').read()
+        tokens = word_tokenize(data)
+        tokens_final = [item.lower() for item in tokens]
+        i_counter = Counter(tokens_final)
+        t_count = len(tokens_final)
+
+        for word in i_counter:
+            i_counter[word] /= float(t_count)
+            print(sum(i_counter.values()))
+
+            from functools import reduce
+        text_rand = []
+        for _ in range(100):
+            r = random.random()
+            counter_rand = .0
+
+            for word, freq in (i_counter.items()):
+                counter_rand += freq
+
+                if counter_rand > r:
+                    text_rand.append(word)
+                    break
+
+        print(' '.join(text_rand))
+
+        print(reduce(mul, [i_counter[a] for a in text_rand], 1.0))
+
+'''
+training = pos[int((.8) * len(pos))] + neg[:int((.8) * len(neg))]
+test = pos[int((.8) * len(pos)):] + neg[int((.8) * len(neg))]
+validation = pos[int((.8) * len(pos)):] + neg[int((.8) * len(neg))]
+'''
+
 ''' convert text into vectors'''
 ''' c = 0.10, c = 0.100: one of these will be the most accurate! find through validation set: for hw'''
 classifier = LinearSVC(c = 0.1)
