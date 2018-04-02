@@ -9,18 +9,14 @@ with open("rt-polarity.neg.txt", 'r') as f:
     neg = f.read().split(' ')
 
 # positive vocab
-counter = Counter(pos)
-for word, count in counter.items():
+counterpos = Counter(pos)
+for word, count in counterpos.items():
     posCount = ("{}:{}".format(word, count))
 
-# negative vocab
-counter = Counter(neg)
-for word, count in counter.items():
-    negCount = ("{}:{}".format(word, count))
 # pos count
 mypos = {}
 i = 0
-for item in neg:
+for item in pos:
     if (i > 0 and item in mypos):
         continue
     else:
@@ -30,7 +26,13 @@ for item in neg:
 p = []
 for item in pos:
     p.append(mypos[item])
+
     print(p)
+
+    # negative vocab
+    counterneg = Counter(neg)
+    for word, count in counterneg.items():
+        negCount = ("{}:{}".format(word, count))
 
 # neg count
 myneg = {}
@@ -47,8 +49,6 @@ for item in neg:
     n.append(myneg[item])
 
     print(n)
-
-
 
 '''Split Data'''
 train = pos[:int((.7) * len(pos))] + neg[:int((.7) * len(neg))]
