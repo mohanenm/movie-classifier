@@ -14,9 +14,6 @@ this should positive
 data = open("rt-polarity.pos.txt").read()
 
 
-for i in pos
-    if any(i in pos in data):
-
 
 
 
