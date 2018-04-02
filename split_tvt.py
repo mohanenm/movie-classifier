@@ -1,19 +1,24 @@
+import nltk
 import random
-from collections import Counter
+from collections import Counter, defaultdict
 from operator import mul
-from nltk import word_tokenize
-import numpy as np
-import pandas as pd
 
+
+cp = Counter()
 pos = []
 with open("rt-polarity.pos.txt") as p:
-    for words in p:
-        pos.append(words), 'pos'
+        for words in p.splitlines():
+            cp.update(words.split())
+        print(cp)
 
+
+cn = Counter()
 neg = []
 with open("rt-polarity.neg.txt") as p:
-    for words in p:
-        neg.append(words), 'neg'
+    mylist = [line.rstrip('\n') for line in p]
+
+
+
 print(len(pos))
 print(len(neg))
 
@@ -22,11 +27,19 @@ train = pos[:int((.7) * len(pos))] + neg[:int((.7) * len(neg))]
 test = pos[int((.85) * len(pos)):] + neg[int((.85) * len(neg)):]
 validate = pos[int((.85) * len(pos)):] + neg[int((.85) * len(neg)):]
 
+
 print(len(train))  # 70%
 print(len(test))  # 15%
 print(len(validate))  # 15%
+print(train)
 
 
+
+
+
+
+
+'''
 df = pd.DataFrame({'text': [[pos],
                             [neg]]})
 
@@ -38,35 +51,6 @@ def f(x): Counter([y for y in x if y in L])
 
 df['new'] = (pd.DataFrame(df['text'].apply(f).values.tolist()).fillna(0).astype(int).reindex(columns=L).values.tolist())
 print(df)
-
-'''
-pos = open("rt-polarity.pos.txt", 'r').read()
-tokens = word_tokenize(pos)
-tokens_final = [item.lower() for item in tokens]
-i_counter = Counter(tokens_final)
-t_count = len(tokens_final)
-
-for word in i_counter:
-    i_counter[word] /= float(t_count)
-    print(sum(i_counter.values()))
-
-    from functools import reduce
-text_rand = []
-for _ in range(100):
-    r = random.random()
-    counter_rand = .0
-
-    for word, freq in (i_counter.items()):
-        counter_rand += freq
-
-        if counter_rand > r:
-            text_rand.append(word)
-            break
-
-print(' '.join(text_rand))
-
-print(reduce(mul, [i_counter[a] for a in text_rand], 1.0))
-
 
 
 convert
