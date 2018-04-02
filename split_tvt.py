@@ -5,8 +5,6 @@ from nltk import word_tokenize
 import numpy as np
 import pandas as pd
 
-
-
 pos = []
 with open("rt-polarity.pos.txt") as p:
     for words in p:
@@ -29,6 +27,17 @@ print(len(test))  # 15%
 print(len(validate))  # 15%
 
 
+df = pd.DataFrame({'text': [[pos],
+                            [neg]]})
+
+L = [train]
+
+
+def f(x): Counter([y for y in x if y in L])
+
+
+df['new'] = (pd.DataFrame(df['text'].apply(f).values.tolist()).fillna(0).astype(int).reindex(columns=L).values.tolist())
+print(df)
 
 '''
 pos = open("rt-polarity.pos.txt", 'r').read()
