@@ -1,12 +1,24 @@
 import nltk
 import random
 from collections import Counter, defaultdict
+import numpy as np
 
 with open("rt-polarity.pos.txt", 'r') as f:
     pos = f.read().split(' ')
 
 with open("rt-polarity.neg.txt", 'r') as f:
     neg = f.read().split(' ')
+
+''' 
+index = 1
+word_to_index = {}
+for word in pos.split():
+    if word in word_to_index:
+        # already seen
+        continue
+    word_to_index[word.lower()] = index
+    index += 1
+'''
 
 # positive vocab
 counterpos = Counter(pos)
@@ -27,12 +39,14 @@ p = []
 for item in pos:
     p.append(mypos[item])
 
-    print(p)
+posVec = np.array(p, dtype=int)
 
-    # negative vocab
-    counterneg = Counter(neg)
-    for word, count in counterneg.items():
-        negCount = ("{}:{}".format(word, count))
+print(posVec)
+
+# negative vocab
+counterneg = Counter(neg)
+for word, count in counterneg.items():
+    negCount = ("{}:{}".format(word, count))
 
 # neg count
 myneg = {}
@@ -48,9 +62,7 @@ n = []
 for item in neg:
     n.append(myneg[item])
 
-    print(n)
-
-'''Split Data'''
+'''Split Data
 train = pos[:int((.7) * len(pos))] + neg[:int((.7) * len(neg))]
 test = pos[int((.85) * len(pos)):] + neg[int((.85) * len(neg)):]
 validate = pos[int((.85) * len(pos)):] + neg[int((.85) * len(neg)):]
@@ -58,6 +70,7 @@ validate = pos[int((.85) * len(pos)):] + neg[int((.85) * len(neg)):]
 print(len(train))  # 70%
 print(len(test))  # 15%
 print(len(validate))  # 15%
+'''
 
 '''
 df = pd.DataFrame({'text': [[pos],
