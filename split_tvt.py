@@ -36,7 +36,9 @@ for neg_sentence in negSentences:
         for x in set(xs):
             posC[x] += 1
 
-            print(posC)
+
+
+
 
 
 
