@@ -2,6 +2,7 @@ import nltk
 import random
 from collections import Counter, defaultdict
 import numpy as np
+import re
 
 with open("rt-polarity.pos.txt", 'r') as f:
     pos = f.read().replace('\n', '')
@@ -21,77 +22,32 @@ while neg.find('.') != -1:
     negSentences.append(neg[:index + 1])
     neg = neg[index + 1:]
 
-
 pos_matrix = []
 for pos_sentence in posSentences:
     pos_matrix.append(pos_sentence.strip().split(' '))
-
-
 
 neg_matrix = []
 for neg_sentence in negSentences:
     neg_matrix.append(neg_sentence.strip().split(' '))
 
+    # positive vocab
+    posC = Counter()
+    for xs in pos_matrix:
+        for x in set(xs):
+            posC[x] += 1
 
-posVec = {pos_matrix[i]: pos_matrix[i+1] for i in range(0, len(pos_matrix), 2)}
-negVec = {neg_matrix[i]: neg_matrix[i+1] for i in range(0, len(neg_matrix), 2)}
-
-print(posVec)
-
-
-''' 
-index = 1
-word_to_index = {}
-for word in pos.split():
-    if word in word_to_index:
-        # already seen
-        continue
-    word_to_index[word.lower()] = index
-    index += 1
+            print(posC)
 
 
-# positive vocab
-counterpos = Counter(pos)
-for word, count in counterpos.items():
-    posCount = ("{}:{}".format(word, count))
 
-# pos count
-mypos = {}
-i = 0
-for item in pos:
-    if (i > 0 and item in mypos):
-        continue
-    else:
-        i = i + 1
-        mypos[item] = i
+'''
+i = iter(pos_matrix)
+posVec = dict(zip(i, i))
 
-p = []
-for item in pos:
-    p.append(mypos[item])
-
-posVec = np.array(p, dtype=int)
+i = iter(neg_matrix)
+negVec = dict(zip(i, i))
 
 print(posVec)
-
-# negative vocab
-counterneg = Counter(neg)
-for word, count in counterneg.items():
-    negCount = ("{}:{}".format(word, count))
-
-# neg count
-myneg = {}
-i = 0
-for item in neg:
-    if (i > 0 and item in myneg):
-        continue
-    else:
-        i = i + 1
-        myneg[item] = i
-
-n = []
-for item in neg:
-    n.append(myneg[item])
-
 '''
 
 '''Split Data
