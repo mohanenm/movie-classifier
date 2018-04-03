@@ -4,10 +4,40 @@ from collections import Counter, defaultdict
 import numpy as np
 
 with open("rt-polarity.pos.txt", 'r') as f:
-    pos = f.read().split(' ')
+    pos = f.read().replace('\n', '')
 
 with open("rt-polarity.neg.txt", 'r') as f:
-    neg = f.read().split(' ')
+    neg = f.read().replace('\n', '')
+
+posSentences = []
+while pos.find('.') != -1:
+    index = pos.find('.')
+    posSentences.append(pos[:index + 1])
+    pos = pos[index + 1:]
+
+negSentences = []
+while neg.find('.') != -1:
+    index = neg.find('.')
+    negSentences.append(neg[:index + 1])
+    neg = neg[index + 1:]
+
+
+pos_matrix = []
+for pos_sentence in posSentences:
+    pos_matrix.append(pos_sentence.strip().split(' '))
+
+
+
+neg_matrix = []
+for neg_sentence in negSentences:
+    neg_matrix.append(neg_sentence.strip().split(' '))
+
+
+posVec = {pos_matrix[i]: pos_matrix[i+1] for i in range(0, len(pos_matrix), 2)}
+negVec = {neg_matrix[i]: neg_matrix[i+1] for i in range(0, len(neg_matrix), 2)}
+
+print(posVec)
+
 
 ''' 
 index = 1
@@ -18,7 +48,7 @@ for word in pos.split():
         continue
     word_to_index[word.lower()] = index
     index += 1
-'''
+
 
 # positive vocab
 counterpos = Counter(pos)
@@ -61,6 +91,8 @@ for item in neg:
 n = []
 for item in neg:
     n.append(myneg[item])
+
+'''
 
 '''Split Data
 train = pos[:int((.7) * len(pos))] + neg[:int((.7) * len(neg))]
