@@ -38,6 +38,9 @@ for i in range(len(pos_train)):
     for j in l_s:
         pos_dict[j] = pos_dict.get(j, len(pos_dict))
 
+
+
+'''
     for i in range(len(pos)):
         line = dict()
         a = re.sub(r'[^\w\s]', '', pos[i]).lower().split()
@@ -47,7 +50,7 @@ for i in range(len(pos_train)):
         od = collections.OrderedDict(sorted(currentline.items()))
         for key, value in od.items():
             ("%d:%d " % (key, value))
-        file.write("\n")
+        file.write("\n") '''
 
 '''
 i = iter(pos_matrix)
