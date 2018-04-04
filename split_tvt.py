@@ -40,6 +40,12 @@ for i in range(len(pos_train)):
 
 
 
+
+
+
+
+
+
 '''
     for i in range(len(pos)):
         line = dict()
