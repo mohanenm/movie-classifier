@@ -1,46 +1,53 @@
-import nltk
-import random
-from collections import Counter, defaultdict
-import numpy as np
+import collections
+import math
 import re
 
-with open("rt-polarity.pos.txt", 'r') as f:
-    pos = f.read().replace('\n', '')
+positive = open("rt-polarity.pos.txt", "r")
+negative = open("rt-polarity.neg.txt", "r")
+validation = open("develop.txt", "w")
+vector = open("Vectors.txt", "w")
+test_file = open("test_vec.txt", "w")
 
-with open("rt-polarity.neg.txt", 'r') as f:
-    neg = f.read().replace('\n', '')
+posRev = [line.strip() for line in positive]
+negRev = [line.strip() for line in negative]
 
-posSentences = []
-while pos.find('.') != -1:
-    index = pos.find('.')
-    posSentences.append(pos[:index + 1])
-    pos = pos[index + 1:]
+trainneg = math.floor(.7 * len(negRev)) - 1
+val_neg = math.floor(.15 * len(negRev)) - 1
+testneg = math.floor(.15 * len(negRev)) - 1
 
-negSentences = []
-while neg.find('.') != -1:
-    index = neg.find('.')
-    negSentences.append(neg[:index + 1])
-    neg = neg[index + 1:]
+trainpos = math.floor(.7 * len(posRev)) - 1
+val_pos = math.floor(.15 * len(posRev)) - 1
+testpos = math.floor(.15 * len(posRev)) - 1
 
-pos_matrix = []
-for pos_sentence in posSentences:
-    pos_matrix.append(pos_sentence.strip().split(' '))
+neg_train = negRev[0:trainneg]
+neg_dev = negRev[trainneg + 1:trainneg + 1 + val_neg]
+neg_test = negRev[trainneg + val_pos + 1:trainpos + val_pos + 1 + testneg]
+pos_train = posRev[0:trainpos]
+pos_dev = posRev[trainpos + 1:trainpos + 1 + val_pos]
+pos_test = posRev[trainpos + val_pos + 1:trainpos + val_pos + 1 + testpos]
 
-neg_matrix = []
-for neg_sentence in negSentences:
-    neg_matrix.append(neg_sentence.strip().split(' '))
+neg_dict = dict()
+for i in range(len(neg_train)):
+    l_s = re.sub(r'[^\w\s]', '', neg_train[i]).lower().split()
+    for j in l_s:
+        neg_dict[j] = neg_dict.get(j, len(neg_dict))
 
-    # positive vocab
-    posC = Counter()
-    for xs in pos_matrix:
-        for x in set(xs):
-            posC[x] += 1
+pos_dict = dict()
+for i in range(len(pos_train)):
+    l_s = re.sub(r'[^\w\s]', '', pos_train[i]).lower().split()
+    for j in l_s:
+        pos_dict[j] = pos_dict.get(j, len(pos_dict))
 
-
-
-
-
-
+    for i in range(len(pos)):
+        line = dict()
+        a = re.sub(r'[^\w\s]', '', pos[i]).lower().split()
+        for j in a:
+            if j in dic:
+                currentline[dic[j]] = currentline.get(dic[j], 0) + 1
+        od = collections.OrderedDict(sorted(currentline.items()))
+        for key, value in od.items():
+            ("%d:%d " % (key, value))
+        file.write("\n")
 
 '''
 i = iter(pos_matrix)
