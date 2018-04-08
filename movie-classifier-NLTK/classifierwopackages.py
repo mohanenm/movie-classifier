@@ -13,10 +13,6 @@ this should positive
 
 data = open("rt-polarity.pos.txt").read()
 
-
-
-
-
 '''
 
 check the list of positive words against 
@@ -41,8 +37,6 @@ training deviceeeeeee
 
 
 '''
-
-
 
 '''
 
